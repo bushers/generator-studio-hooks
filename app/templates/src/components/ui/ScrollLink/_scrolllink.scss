@@ -1,0 +1,47 @@
+/*************************/
+/////// GENERAL VARS //////
+/*************************/
+
+//TODO vars
+
+/*************************/
+/////// CUSTOM VARS /////// 
+/*************************/
+
+//TODO vars
+
+/*************************/
+///// TYPOGRAPHY VARS /////
+/*************************/
+
+//TODO vars
+
+/*************************/
+///// COMPONENT CODE //////
+/*************************/
+.scroll-link{
+    
+}
+
+@include SmallDevice{
+    .scroll-link{
+    }
+}
+
+
+@include MediumDevice{
+    .scroll-link{
+    }
+}
+
+@include OnEmbedDevice(){
+    .scroll-link{
+
+    }
+}
+
+
+/*************************/
+/////// CUSTOM CODE /////// 
+/*************************/
+//TODO code

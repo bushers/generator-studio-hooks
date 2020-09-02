@@ -1,0 +1,29 @@
+{
+  "name": "generator-studio-hooks",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bushers/generator-studio-hooks.git"
+  },
+  "keywords": [
+    "yo",
+    "generator",
+    "templating",
+    "hooks"
+  ],
+  "author": "Nick Bushby",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "yeoman-generator": "^3.1.1"
+  },
+  "bugs": {
+    "url": "https://github.com/bushers/generator-studio-hooks/issues"
+  },
+  "homepage": "https://github.com/bushers/generator-studio-hooks#readme"
+}

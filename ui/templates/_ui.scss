@@ -1,0 +1,20 @@
+.<%= kebabCName %>{
+
+}
+
+@include SmallDevice{
+    .<%= kebabCName %>{
+    }
+}
+
+
+@include MediumDevice{
+    .<%= kebabCName %>{
+    }
+}
+
+@include OnEmbedDevice(){
+    .<%= kebabCName %>{
+
+    }
+}
