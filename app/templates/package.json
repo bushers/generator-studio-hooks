@@ -6,10 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "rm -Rf .fusebox && node fuse watch",
-    "publish": "rm -Rf .fusebox && node fuse publish",
-    <% if(isStory){ %> ,
-      "storybook": "start-storybook -p 6006"
-    <% } %>
+    "publish": "rm -Rf .fusebox && node fuse publish"
   },
   "author": "",
   "license": "ISC",
@@ -24,24 +21,6 @@
     "smoothscroll-polyfill": "^0.4.4"
   },
   "devDependencies": {
-    <% if(isStory){ %>
-    "@babel/core": "^7.0.0-rc.1",
-      "@babel/preset-env": "^7.0.0-rc.1",
-      "@storybook/addon-actions": "^4.1.13",
-      "@storybook/addon-knobs": "^4.1.13",
-      "@storybook/addon-links": "^4.1.13",
-      "@storybook/addons": "^4.1.13",
-      "@storybook/react": "^4.1.13",
-      "@types/storybook__react": "^4.0.1",
-      "babel-core": "^6.26.3",
-      "babel-loader": "^7.1.5",
-      "babel-plugin-emotion": "^9.2.6",
-      "babel-preset-minify": "^0.4.3",
-      "awesome-typescript-loader": "^5.2.1",
-      "css-loader": "^2.1.0",
-      "sass-loader": "^7.1.0",
-      "style-loader": "^0.23.1"
-    <% } %>
     "@types/lodash": "^4.14.115",
     "@types/node": "^10.5.5",
     "@types/react": "^16.8.4",
