@@ -10,7 +10,7 @@ export interface <%= uCamelCName %>State {
 
 export class <%= uCamelCName %> extends React.Component<<%= uCamelCName %>Props, <%= uCamelCName %>State> {
     el:HTMLDivElement;
-    constructor(p:<%= uCamelCName %>Props){
+    constructor(p:<%= uCamelCName %>Props) {
         super(p);
     }
 
