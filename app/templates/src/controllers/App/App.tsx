@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import * as throttle from 'lodash.throttle';
-import smoothscroll from 'smoothscroll-polyfill';
+import * as smoothscroll from 'smoothscroll-polyfill';
 
 import { ACTIONS } from './Actions';
 import { AppState } from './StateAndProps';
@@ -22,6 +22,9 @@ const App: React.FC = () => {
     const [_, setUpdateView] = React.useState(0);
 
     React.useEffect(() => {
+        // Add smooth scroll polyfill
+        smoothscroll.polyfill();
+
         // Get deeplink & store in state
         const el = document.getElementById('SiteDeeplink');
         (el.firstElementChild as HTMLElement).style.width = null;
@@ -29,10 +32,9 @@ const App: React.FC = () => {
         el.parentNode.removeChild(el);
 
         // Get data from Firebase
-        GET_FIREBASE_DATA().then((e) => dispatch(ACTIONS.DATA_LOADED(e)));
-
-        // Add smooth scroll polyfill
-        smoothscroll.polyfill();
+        GET_FIREBASE_DATA()
+            .then((e) => dispatch(ACTIONS.DATA_LOADED(e)))
+            .catch((err) => console.log(`Firebasee error: ${err}`));
 
         // Add resize listener to force re-render
         window.addEventListener(
