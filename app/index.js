@@ -113,10 +113,14 @@ module.exports = class extends Generator {
             this.destinationPath('.gitignore')
         );
 
-        this.fs.copyTpl(
-            this.templatePath('fuse.js'),
-            this.destinationPath('fuse.js'),
-            {srcDir:srcDir}
+        this.fs.copy(
+            this.templatePath('index.html'),
+            this.destinationPath('index.html')
+        );
+
+        this.fs.copy(
+            this.templatePath('vite.config.js'),
+            this.destinationPath('vite.config.js')
         );
 
         this.fs.copy(
