@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { useDispatch } from 'react-redux';
 
-import { ACTIONS } from '../../../controllers/App/Actions';
 import { useLockBodyScroll } from '../../../hooks';
 
 export interface DialogProps {
+    dialog: React.ReactNode;
+    unSetDialog: () => void;
     close?: () => void;
     className?: string;
     position?: 'top' | 'bottom' | 'left' | 'right' | 'middle';
@@ -21,6 +21,8 @@ export interface DialogProps {
 export interface DialogState {}
 
 const Dialog: React.FC<DialogProps> = ({
+    dialog,
+    unSetDialog,
     className = '',
     position = 'middle',
     close = () => ({}),
@@ -41,7 +43,6 @@ const Dialog: React.FC<DialogProps> = ({
 
     const backdropEl = React.useRef(null);
     const contentWrapperEl = React.useRef(null);
-    const dispatch = useDispatch();
 
     // const animteExit = () => {
     //     this.backdropEl.classList.remove('animated', 'fadeIn');
@@ -77,15 +78,15 @@ const Dialog: React.FC<DialogProps> = ({
                     id="DialogCloseButton"
                     onClick={() => {
                         close();
-                        dispatch(ACTIONS.CLOSE_DIALOG());
+                        unSetDialog();
                     }}
                 >
                     <i className="icon-close"></i>
                 </div>
-                <main className="dialog__content">{children}</main>
+                <main className="dialog__content">{dialog}</main>
             </div>
         </div>,
-        document.getElementById('SiteContainer'),
+        document.getElementById('dialog-root'),
     );
 };
 

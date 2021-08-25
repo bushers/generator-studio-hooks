@@ -1,0 +1,20 @@
+.animate-on-scroll{
+    transition: opacity 0.5s ease-in;
+}
+
+@include SmallDevice{
+    .animate-on-scroll{
+    }
+}
+
+
+@include MediumDevice{
+    .animate-on-scroll{
+    }
+}
+
+@include OnEmbedDevice(){
+    .animate-on-scroll{
+
+    }
+}

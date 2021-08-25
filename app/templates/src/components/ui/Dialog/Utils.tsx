@@ -9,10 +9,10 @@ import { iNavData } from '../../../models/models';
 interface MenuDialogProps {
     navData: iNavData[];
     currSection: string;
-    isSinglePage: boolean;
+    handleClick: (id: string) => void;
 }
 
-export const MenuDialog: React.FC<MenuDialogProps> = ({ navData, currSection, isSinglePage }) => {
+export const MenuDialog: React.FC<MenuDialogProps> = ({ navData, currSection, handleClick }) => {
     return (
         <>
             <div className="nav-menu__campaign-logo ">
@@ -20,7 +20,7 @@ export const MenuDialog: React.FC<MenuDialogProps> = ({ navData, currSection, is
                     <img src={RES_URL + 'img/campaign-logo.svg'} alt={I18n.t('altText')} />
                 </a>
             </div>
-            <NavMenu navData={navData} currSection={currSection} isSinglePage={isSinglePage} />
+            <NavMenu navData={navData} currSection={currSection} handleClick={handleClick} />
         </>
     );
 };

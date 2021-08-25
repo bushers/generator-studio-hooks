@@ -1,14 +1,9 @@
-export interface iActionType {
-    type: number;
-    data: any | any[];
-}
-
 export interface Dictionary<T> {
     [idx: string]: T;
 }
 
 export interface iValue {
-    key: string | number;
+    key: string;
     label?: string;
     value: React.ReactNode;
 }
@@ -57,6 +52,12 @@ export const INIT_TRANSLATIONS: Translation = {
     altText: '',
 };
 
+export interface iAppData {
+    navData: iNavData[];
+    data: Dictionary<iData>;
+    locale: Translation;
+}
+
 export interface iNavData {
     key: string;
     title: string;
@@ -73,10 +74,6 @@ export interface iData {
     graphType: string;
     copy: string;
     data: any[] | any;
-}
-
-export interface iSinglePageSection {
-    key: string;
-    isAnimated?: boolean;
-    componentName: string;
+    order: number;
+    footnote: string;
 }

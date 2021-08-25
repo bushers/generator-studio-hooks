@@ -1,4 +1,4 @@
-module.exports =  {
+module.exports = {
     parser: '@typescript-eslint/parser', // Specifies the ESLint parser
     extends: [
         'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
@@ -6,7 +6,7 @@ module.exports =  {
         'plugin:prettier/recommended', // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
         'plugin:react/recommended',
     ],
-    parserOptions:  {
+    parserOptions: {
         ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
         sourceType: 'module', // Allows for the use of imports
     },
@@ -18,5 +18,5 @@ module.exports =  {
         'react/prop-types': 0,
         '@typescript-eslint/class-name-casing': 0,
         'react/jsx-no-target-blank': 0,
-    }
+    },
 };

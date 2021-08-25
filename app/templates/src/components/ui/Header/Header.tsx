@@ -12,41 +12,36 @@ export interface HeaderProps {
     navData: iNavData[];
     currSection: string;
     openBurgerMenu?: (e: any) => void;
-    isSplash?: boolean;
-    isSinglePage: boolean;
+    scrollToAnchor?: (id: string) => void;
 }
 
 export interface HeaderState {}
 
-const Header: React.FC<HeaderProps> = (props) => {
-    const cls = props.className || '';
+const Header: React.FC<HeaderProps> = ({
+    className,
+    deeplink,
+    navData,
+    currSection,
+    openBurgerMenu,
+    scrollToAnchor,
+}) => {
+    const cls = className || '';
 
     return (
-        <div className={'header ' + cls} ref={(e) => (this.el = e)}>
-            <div
-                dangerouslySetInnerHTML={{ __html: props.deeplink }}
-                className={`header__block header__client-logo ${!props.isSplash ? 'header__block--hidden ' : ''}`}
-            ></div>
-            <div className={`header__block header__campaign-logo ${props.isSplash ? 'header__block--hidden ' : ''}`}>
+        <div className={'header ' + cls}>
+            <div dangerouslySetInnerHTML={{ __html: deeplink }} className={`header__block header__client-logo `}></div>
+            <div className={`header__block header__campaign-logo `}>
                 <a href={`/`}>
                     <img src={RES_URL + 'img/_logos/campaign-logo.svg'} alt={I18n.t('altText')} />
                 </a>
             </div>
-            <div className={'header__block header__burger '} onClick={props.openBurgerMenu}>
+            <div className={'header__block header__burger '} onClick={openBurgerMenu}>
                 <i className="icon-burger" />
                 BURGER
             </div>
-            <div
-                className={`header__block header__menu ${
-                    props.currSection == 'splash' ? 'header__block--hidden ' : ''
-                }`}
-            >
-                {props.navData.length > 0 && (
-                    <NavMenu
-                        isSinglePage={props.isSinglePage}
-                        currSection={props.currSection}
-                        navData={props.navData}
-                    />
+            <div className={`header__block header__menu ${currSection == 'splash' ? 'header__block--hidden ' : ''}`}>
+                {navData.length > 0 && (
+                    <NavMenu currSection={currSection} navData={navData} handleClick={scrollToAnchor} />
                 )}
             </div>
             <div className="header__block header__socials">

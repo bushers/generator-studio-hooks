@@ -1,54 +1,34 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { iNavData } from '../../../models/models';
-import ScrollLink from '../ScrollLink/ScrollLink';
-import { ACTIONS } from '../../../controllers/App/Actions';
 
 export interface NavMenuProps {
     className?: string;
     navData: iNavData[];
     currSection: string;
-    /**
-     *  If single page layout, render scrolling hash links
-     */
-    isSinglePage: boolean;
+    handleClick: (id: string) => void;
 }
 
-const NavMenu: React.FC<NavMenuProps> = (props) => {
-    const cls = props.className || '';
-    const dispatch = useDispatch();
+const NavMenu: React.FC<NavMenuProps> = ({ className, navData, currSection, handleClick }) => {
+    const cls = className || '';
 
     return (
         <ul className={'nav-menu ' + cls}>
-            {props.navData.map((item: iNavData, i) => (
+            {navData.map((item: iNavData) => (
                 <li
                     key={item.key}
-                    className={`nav-menu__item ${props.currSection == item.key ? 'nav-menu__item--active ' : ''}`}
+                    className={`nav-menu__item ${currSection == item.key ? 'nav-menu__item--active ' : ''}`}
                 >
-                    {props.isSinglePage ? (
-                        <ScrollLink id={item.key}>{item.title}</ScrollLink>
-                    ) : (
-                        <a className="nav-menu__link" href={item.url} onClick={() => dispatch(ACTIONS.CLOSE_DIALOG)}>
-                            {item.title}
-                        </a>
-                    )}
-
-                    {item.children && item.children.length > 0 && (
-                        <ul className="nav-menu__sub-list">
-                            {item.children.map((subItem) => (
-                                <li
-                                    key={subItem.key}
-                                    className="nav-menu__sub-item"
-                                    onClick={() => dispatch(ACTIONS.CLOSE_DIALOG)}
-                                >
-                                    <a href={subItem.url} className="nav-menu__sub-item-link">
-                                        {subItem.title}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
+                    <a
+                        className="nav-menu__link"
+                        href={item.url}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleClick(item.key);
+                        }}
+                    >
+                        {item.title}
+                    </a>
                 </li>
             ))}
         </ul>

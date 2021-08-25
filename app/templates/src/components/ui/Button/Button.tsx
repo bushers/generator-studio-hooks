@@ -7,11 +7,11 @@ export interface ButtonProps {
     className?: string;
 }
 
-export const Button: React.SFC<ButtonProps> = (props) => {
-    const cls = props.className || '';
+export const Button: React.FC<ButtonProps> = ({ className, onClick, children }) => {
+    const cls = className || '';
     return (
-        <div className={'button ' + cls} onClick={props.onClick}>
-            <div className="button__label">{props.children}</div>
+        <div className={'button ' + cls} onClick={onClick}>
+            <div className="button__label">{children}</div>
         </div>
     );
 };
@@ -29,12 +29,12 @@ function redirectTo(e: React.SyntheticEvent<any>) {
     }
 }
 
-export const LinkButton: React.SFC<LinkButtonProps> = (props) => {
-    const cls = props.className || '';
-    // {props.label}
+export const LinkButton: React.FC<LinkButtonProps> = ({ className, href, children }) => {
+    const cls = className || '';
+
     return (
-        <a href={props.href || ''} className={'button ' + cls} onTouchStart={redirectTo}>
-            <div className="button__label">{props.children}</div>
+        <a href={href || ''} className={'button ' + cls} onTouchStart={redirectTo}>
+            <div className="button__label">{children}</div>
         </a>
     );
 };

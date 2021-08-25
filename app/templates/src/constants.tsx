@@ -1,12 +1,13 @@
 import fb from './services/Firebase';
+import { singleton as jump } from './helpers/jump';
 
-export const SCROLL_TO_SECTION = (id: string) => {
+export const SCROLL_TO_SECTION = (id: string, offset = 0) => {
     const el: HTMLElement = document.getElementById(id);
 
     if (el) {
-        window.scrollTo({
-            top: el.offsetTop,
-            behavior: 'smooth',
+        jump(el, {
+            duration: 800,
+            offset,
         });
     }
 };

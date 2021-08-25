@@ -6,20 +6,7 @@ export interface MobLandScreenProps {
     className?: string;
 }
 
-const MobLandScreen: React.SFC<MobLandScreenProps> = (props) => {
-    const cls = props.className || '';
-
-    return (
-        <div className={'mob-land-screen ' + cls}>
-            <h1 className="mob-land-screen__copy">
-                {I18n.t('rotationPrompt')}
-            </h1>
-            {phoneSvg()}
-        </div>
-    );
-};
-
-const phoneSvg = (fillColor = "#000000") => (
+const phoneSvg = (fillColor = '#000000') => (
     <svg
         id="rotIcon"
         className="mob-land-screen__icon"
@@ -49,5 +36,16 @@ const phoneSvg = (fillColor = "#000000") => (
         <rect height="48.6" width="100" rx="6" stroke={fillColor} strokeWidth="2" x="1" y="28" />
     </svg>
 );
+
+const MobLandScreen: React.FC<MobLandScreenProps> = ({ className }) => {
+    const cls = className || '';
+
+    return (
+        <div className={'mob-land-screen ' + cls}>
+            <h1 className="mob-land-screen__copy">{I18n.t('rotationPrompt')}</h1>
+            {phoneSvg()}
+        </div>
+    );
+};
 
 export default MobLandScreen;

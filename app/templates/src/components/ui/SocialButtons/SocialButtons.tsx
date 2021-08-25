@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDialog } from '../../../hooks';
 
-import { ACTIONS } from '../../../controllers/App/Actions';
 import { EmbedComponent, InfoComponent } from '../Dialog/Utils';
 
 export interface SocialButtonsProps {}
@@ -14,7 +13,7 @@ export interface SocialButtonsState {
 export const SocialButtons: React.FC<SocialButtonsProps> = (props) => {
     const [twitterLink, setTwitterLink] = React.useState('');
     const [facebookLink, setFacebookLink] = React.useState('');
-    const dispatch = useDispatch();
+    const { setDialog } = useDialog();
 
     const getTwitterText = () => {
         const metas = document.getElementsByTagName('meta');
@@ -37,11 +36,11 @@ export const SocialButtons: React.FC<SocialButtonsProps> = (props) => {
     }, []);
 
     const onEmbedClick = () => {
-        dispatch(ACTIONS.OPEN_DIALOG(<EmbedComponent />));
+        setDialog(<EmbedComponent />);
     };
 
     const onInfoClick = () => {
-        dispatch(ACTIONS.OPEN_DIALOG(<InfoComponent />));
+        setDialog(<InfoComponent />);
     };
 
     return (

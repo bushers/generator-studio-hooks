@@ -1,0 +1,20 @@
+.page-section{
+
+}
+
+@include SmallDevice{
+    .page-section{
+    }
+}
+
+
+@include MediumDevice{
+    .page-section{
+    }
+}
+
+@include OnEmbedDevice(){
+    .page-section{
+
+    }
+}

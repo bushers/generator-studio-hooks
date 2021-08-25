@@ -1,16 +1,16 @@
-import { Dictionary, Translation } from '../models/models';
+import { Translation } from '../models/models';
 
 class I18n {
     locale: any;
     lang: string;
 
-    setLocale = (locale: Dictionary<Translation>) => {
+    setLocale = (locale: Translation) => {
         this.locale = locale;
     };
 
     t = (key: string) => {
         // get the text from locale or the [key]
-        const loca = this.locale; //store.getState().app.locale;
+        const loca = this.locale;
         if (loca) {
             const v = loca[key];
             return v || '[' + key + ']';

@@ -1,0 +1,20 @@
+.scrollable-anchor{
+
+}
+
+@include SmallDevice{
+    .scrollable-anchor{
+    }
+}
+
+
+@include MediumDevice{
+    .scrollable-anchor{
+    }
+}
+
+@include OnEmbedDevice(){
+    .scrollable-anchor{
+
+    }
+}

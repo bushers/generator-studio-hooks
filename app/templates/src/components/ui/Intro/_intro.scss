@@ -1,0 +1,20 @@
+.intro{
+
+}
+
+@include SmallDevice{
+    .intro{
+    }
+}
+
+
+@include MediumDevice{
+    .intro{
+    }
+}
+
+@include OnEmbedDevice(){
+    .intro{
+
+    }
+}

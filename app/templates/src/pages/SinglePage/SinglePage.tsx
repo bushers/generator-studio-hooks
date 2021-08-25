@@ -1,76 +1,43 @@
 import * as React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import * as ScrollAnimation from 'react-animate-on-scroll';
 
-import { iSinglePageSection, iNavData } from '../../models/models';
+import { iAppData } from '../../models/models';
 import { SCROLL_TO_SECTION } from '../../constants';
 import { MenuDialog } from '../../components/ui/Dialog/Utils';
 import Header from '../../components/ui/Header/Header';
-import { AppState } from '../../controllers/App/StateAndProps';
 import Splash from '../Splash/Splash';
-import { ACTIONS } from '../../controllers/App/Actions';
+import ScrollableAnchor from '../../components/ui/ScrollableAnchor/ScrollableAnchor';
+import AnimateOnScroll from '../../components/ui/AnimateOnScroll/AnimateOnScroll';
+import { useDialog } from '../../hooks';
+import { Button } from '../../components/ui/Button/Button';
+import I18n from '../../services/I18n';
+import PageSection from '../../components/ui/PageSection/PageSection';
+import Intro from '../../components/ui/Intro/Intro';
 
 export interface SinglePageProps {
     className?: string;
+    appData: iAppData;
+    deeplink: string;
 }
 
-// Exmaple sections
-const Intro = (props) => (
-    <div style={{ background: 'grey', minHeight: 500 }}>
-        <h1>Intro section</h1>
-    </div>
-);
-const Commentary = (props) => (
-    <div style={{ background: 'coral', minHeight: 800 }}>
-        <h1>Commentary section</h1>
-    </div>
-);
+interface PageParams {
+    key: string;
+}
 
-/**
- * Example sections data, replace with real data from Firebase
- */
-const dummySections: iSinglePageSection[] = [
-    { key: 'splash', componentName: 'Splash', isAnimated: false },
-    { key: 'intro', componentName: 'Intro', isAnimated: true },
-    { key: 'commentary', componentName: 'Commentary', isAnimated: true },
-];
+export const SCROLL_OFFSET = 0;
 
-// Import and list all components here that you want to render as a single page section
-// The component name must match the componentName property from the iSinglePageSection data
-const components = {
-    Splash,
-    Intro,
-    Commentary,
-};
+const SinglePage: React.FC<SinglePageProps> = ({ appData, deeplink }) => {
+    const { key } = useParams<PageParams>();
+    const { setDialog, unSetDialog } = useDialog();
 
-const SinglePage: React.FC<SinglePageProps> = (props) => {
-    const { app } = useSelector((state: AppState) => state);
-    const { key } = useParams();
-    const dispatch = useDispatch();
-
-    const renderSections = (sections: iSinglePageSection[]): React.ReactNode[] =>
-        sections.map((sec) => {
-            if (sec.isAnimated) {
-                return (
-                    <div id={sec.key} key={sec.key}>
-                        <ScrollAnimation animateIn="fadeIn" animateOnce={true}>
-                            {React.createElement(components[sec.componentName], {
-                                data: app.data[`${sec.key}`],
-                            })}
-                        </ScrollAnimation>
-                    </div>
-                );
-            }
-            return (
-                <div id={sec.key} key={sec.key}>
-                    {React.createElement(components[sec.componentName], { data: app.data[`${sec.key}`] })}
-                </div>
-            );
-        });
+    const scrollToAnchor = (id: string) => {
+        SCROLL_TO_SECTION(id, SCROLL_OFFSET);
+        location.hash = id;
+        unSetDialog();
+    };
 
     const openBurgerMenu = () => {
-        dispatch(ACTIONS.OPEN_DIALOG(<MenuDialog navData={app.navData} currSection={key} isSinglePage={true} />));
+        setDialog(<MenuDialog navData={appData.navData} currSection={key} handleClick={scrollToAnchor} />);
     };
 
     React.useLayoutEffect(() => {
@@ -84,15 +51,40 @@ const SinglePage: React.FC<SinglePageProps> = (props) => {
         <div className={'single-page '}>
             <div className="single-page__header">
                 <Header
-                    deeplink={app.deeplink}
-                    navData={app.navData}
+                    deeplink={deeplink}
+                    navData={appData.navData}
                     currSection={key}
                     openBurgerMenu={openBurgerMenu}
-                    isSinglePage={true}
+                    scrollToAnchor={scrollToAnchor}
                 />
             </div>
 
-            <div className="single-page__content">{renderSections(dummySections)}</div>
+            <div className="single-page__content">
+                <ScrollableAnchor hashId="home">
+                    <Splash locale={appData.locale} deeplink={deeplink} navData={appData.navData} />
+                </ScrollableAnchor>
+
+                <ScrollableAnchor hashId="intro">
+                    <Intro />
+                </ScrollableAnchor>
+
+                {appData.data &&
+                    Object.keys(appData.data)
+                        .sort((a, b) => appData.data[`${a}`].order - appData.data[`${b}`].order)
+                        .map((key) => (
+                            <ScrollableAnchor hashId={key} key={key}>
+                                <section className={`single-page__section single-page__section--${key}`}>
+                                    <AnimateOnScroll triggerOnce={true}>
+                                        <PageSection data={appData.data[`${key}`]} />
+                                    </AnimateOnScroll>
+                                </section>
+                            </ScrollableAnchor>
+                        ))}
+            </div>
+
+            <Button className="back-to-top" onClick={() => SCROLL_TO_SECTION('home', 0)}>
+                {I18n.t('backToTop')}
+            </Button>
         </div>
     );
 };

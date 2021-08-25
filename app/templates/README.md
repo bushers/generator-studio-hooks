@@ -1,89 +1,9 @@
-#__Devling Template Generator__
+# Generator Studio Hooks Template
 
-##Getting started
+This is the template code used by our bespoke Yeoman code generator - [Generator Studio Hooks](https://github.com/bushers/generator-studio-hooks)
 
-install Yeoman and generator-devling globally
+This code will be generated when a new project is created.
 
-```
-npm install yo -g
-npm install generator-devling -g
-```
+In order to keep the generator up to date, it is important that any updates here are also reflected in the main generator repo (Github link above), in the folder `app/templates`.
 
-
-##How it works
-
-To create the project template run the following
-
-##devling
-```
-
-yo devling {AppName}
-
-```
-Where {AppName} is the name of the application
-
-###Flags
-```
---is-story  // specifies that the project 
-            // will include storybook libs 
-            // so it will copy relevant files
-
---src-dir {directory}   // in case the src files will 
-                        // need to sit on a different 
-                        // directory specifies the directory
-
---exclude-public    // flag if the public folder 
-                    // should be excluded when 
-                    // generating the project
-```
-
-##Controller
-To create a controller run the following 
-
-```
-yo devling:ctrl {CtrlName}
-```
-Where {CtrlName} is the name of the controller
-
-##Page
-To create a page run the following 
-
-```
-yo devling:page {PageName}
-```
-Where {PageName} is the name of the page
-
-###Flags
-```
---add-reducer // this flag will also create a file Reducer.ts
-```
-
-##UI Component
-To create a ui component run the following 
-
-```
-yo devling:ui {UiName}
-```
-Where {UiName} is the name of the ui component
-
-###Flags
-```
---folder {folderName}   // specify a folder name 
-                        // under under components for files to be generated
-                        // default value "ui"
-```
-
-##Presentation Component (Functional component)
-To create a ui component run the following 
-
-```
-yo devling:pr {PrName}
-```
-Where {PrName} is the name of the functional component
-
-###Flags
-```
---folder {folderName}   // specify a folder name 
-                        // under under components for files to be generated
-                        // default value "ui"
-```
+**Note:** When copying over this code, do not copy this readme file as this relates to this repo and not instructions on using the generator itself.
