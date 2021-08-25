@@ -24,9 +24,6 @@ Where {AppName} is the name of the application
 
 ###Flags
 ```
---is-story  // specifies that the project
-            // will include storybook libs
-            // so it will copy relevant files
 
 --src-dir {directory}   // in case the src files will
                         // need to sit on a different
@@ -37,29 +34,9 @@ Where {AppName} is the name of the application
                     // generating the project
 ```
 
-##Controller
-To create a controller run the following
-
-```
-yo studio-hooks:ctrl {CtrlName}
-```
-Where {CtrlName} is the name of the controller
-
-##Page
-To create a page run the following
-
-```
-yo studio-hooks:page {PageName}
-```
-Where {PageName} is the name of the page
-
-###Flags
-```
---add-reducer // this flag will also create a file Reducer.ts
-```
 
 ##UI Component
-To create a ui component run the following
+To create a React class component run the following
 
 ```
 yo studio-hooks:ui {UiName}
@@ -74,7 +51,7 @@ Where {UiName} is the name of the ui component
 ```
 
 ##Presentation Component (Functional component)
-To create a ui component run the following
+To create a React function component run the following
 
 ```
 yo studio-hooks:pr {PrName}
@@ -94,11 +71,3 @@ Where {PrName} is the name of the functional component
                         // under under components for files to be generated
                         // default value "ui"
 ```
-
-##Model Script
-To create a model scafolding template run the following
-
-```
-yo studio-hooks:model {ModelName}
-```
-Where {ModelName} is the name of the model

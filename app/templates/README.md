@@ -1,9 +1,73 @@
-# Generator Studio Hooks Template
+#__Studio Template Generator__
 
-This is the template code used by our bespoke Yeoman code generator - [Generator Studio Hooks](https://github.com/bushers/generator-studio-hooks)
+##Getting started
 
-This code will be generated when a new project is created.
+install Yeoman and generator-studio-hooks globally
 
-In order to keep the generator up to date, it is important that any updates here are also reflected in the main generator repo (Github link above), in the folder `app/templates`.
+```
+npm install yo -g
+npm install generator-studio-hooks -g
+```
 
-**Note:** When copying over this code, do not copy this readme file as this relates to this repo and not instructions on using the generator itself.
+
+##How it works
+
+To create the project template run the following
+
+##studio
+```
+
+yo studio-hooks {AppName}
+
+```
+Where {AppName} is the name of the application
+
+###Flags
+```
+
+--src-dir {directory}   // in case the src files will
+                        // need to sit on a different
+                        // directory specifies the directory
+
+--exclude-public    // flag if the public folder
+                    // should be excluded when
+                    // generating the project
+```
+
+
+##UI Component
+To create a React class component run the following
+
+```
+yo studio-hooks:ui {UiName}
+```
+Where {UiName} is the name of the ui component
+
+###Flags
+```
+--folder {folderName}   // specify a folder name
+                        // under under components for files to be generated
+                        // default value "ui"
+```
+
+##Presentation Component (Functional component)
+To create a React function component run the following
+
+```
+yo studio-hooks:pr {PrName}
+```
+Where {PrName} is the name of the functional component
+
+###Flags
+```
+--folder {folderName}   // specify a folder name
+                        // under under components for files to be generated
+                        // default value "ui"
+```
+
+###Flags
+```
+--folder {folderName}   // specify a folder name
+                        // under under components for files to be generated
+                        // default value "ui"
+```
