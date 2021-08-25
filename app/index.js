@@ -119,8 +119,8 @@ module.exports = class extends Generator {
         );
 
         this.fs.copy(
-            this.templatePath('vite.config.js'),
-            this.destinationPath('vite.config.js')
+            this.templatePath('vite.config.ts'),
+            this.destinationPath('vite.config.ts')
         );
 
         this.fs.copy(
