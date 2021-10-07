@@ -4,9 +4,10 @@ import { useInView } from 'react-intersection-observer';
 export interface ScrollableAnchorProps {
     className?: string;
     hashId: string;
+    setHashKey: (key: string) => void;
 }
 
-export const ScrollableAnchor: React.FC<ScrollableAnchorProps> = ({ children, className, hashId }) => {
+export const ScrollableAnchor: React.FC<ScrollableAnchorProps> = ({ children, className, hashId, setHashKey }) => {
     const cls = className || '';
     const [ref, inView, entry] = useInView({
         threshold: 0.4,
@@ -15,7 +16,10 @@ export const ScrollableAnchor: React.FC<ScrollableAnchorProps> = ({ children, cl
 
     React.useEffect(() => {
         if (inView) {
-            history.pushState(null, null, `#${hashId}`);
+            setHashKey(hashId);
+            if (history.pushState) {
+                history.pushState(null, null, `#${hashId}`);
+            }
         }
     }, [inView]);
 

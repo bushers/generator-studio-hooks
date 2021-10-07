@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
 
 import { iAppData } from '../../models/models';
 import { SCROLL_TO_SECTION } from '../../constants';
@@ -20,30 +19,25 @@ export interface SinglePageProps {
     deeplink: string;
 }
 
-interface PageParams {
-    key: string;
-}
-
 export const SCROLL_OFFSET = 0;
 
 const SinglePage: React.FC<SinglePageProps> = ({ appData, deeplink }) => {
-    const { key } = useParams<PageParams>();
     const { setDialog, unSetDialog } = useDialog();
+    const [hashKey, setHashKey] = React.useState(location.hash.replace('#', ''));
 
     const scrollToAnchor = (id: string) => {
         SCROLL_TO_SECTION(id, SCROLL_OFFSET);
-        location.hash = id;
         unSetDialog();
     };
 
     const openBurgerMenu = () => {
-        setDialog(<MenuDialog navData={appData.navData} currSection={key} handleClick={scrollToAnchor} />);
+        setDialog(<MenuDialog navData={appData.navData} currSection={hashKey} handleClick={scrollToAnchor} />);
     };
 
     React.useLayoutEffect(() => {
         location.hash &&
             setTimeout(() => {
-                SCROLL_TO_SECTION(location.hash.replace('#', ''));
+                SCROLL_TO_SECTION(hashKey, SCROLL_OFFSET);
             }, 300);
     }, []);
 
@@ -53,18 +47,18 @@ const SinglePage: React.FC<SinglePageProps> = ({ appData, deeplink }) => {
                 <Header
                     deeplink={deeplink}
                     navData={appData.navData}
-                    currSection={key}
+                    currSection={hashKey}
                     openBurgerMenu={openBurgerMenu}
                     scrollToAnchor={scrollToAnchor}
                 />
             </div>
 
             <div className="single-page__content">
-                <ScrollableAnchor hashId="home">
+                <ScrollableAnchor hashId="home" setHashKey={(key) => setHashKey(key)}>
                     <Splash locale={appData.locale} deeplink={deeplink} navData={appData.navData} />
                 </ScrollableAnchor>
 
-                <ScrollableAnchor hashId="intro">
+                <ScrollableAnchor hashId="intro" setHashKey={(key) => setHashKey(key)}>
                     <Intro />
                 </ScrollableAnchor>
 
@@ -72,7 +66,7 @@ const SinglePage: React.FC<SinglePageProps> = ({ appData, deeplink }) => {
                     Object.keys(appData.data)
                         .sort((a, b) => appData.data[`${a}`].order - appData.data[`${b}`].order)
                         .map((key) => (
-                            <ScrollableAnchor hashId={key} key={key}>
+                            <ScrollableAnchor hashId={key} key={key} setHashKey={(key) => setHashKey(key)}>
                                 <section className={`single-page__section single-page__section--${key}`}>
                                     <AnimateOnScroll triggerOnce={true}>
                                         <PageSection data={appData.data[`${key}`]} />
@@ -82,9 +76,11 @@ const SinglePage: React.FC<SinglePageProps> = ({ appData, deeplink }) => {
                         ))}
             </div>
 
-            <Button className="back-to-top" onClick={() => SCROLL_TO_SECTION('home', 0)}>
-                {I18n.t('backToTop')}
-            </Button>
+            <div className="single-page__back-to-top">
+                <Button onClick={() => SCROLL_TO_SECTION('home', 0)}>
+                    {I18n.t('backToTop')}
+                </Button>
+            </div>
         </div>
     );
 };
