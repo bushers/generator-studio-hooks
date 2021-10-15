@@ -10,7 +10,7 @@ declare let process: {
     };
 };
 
-export const RES_URL = (window as any).__RES_URL__ || '';
+export const RES_URL = (window as any).__RES_URL__ || './';
 
 export const CONFIG = {
     URL: process.env.NODE_ENV == 'production' ? (window as any).__RES_URL__ || '' : RES_URL,
