@@ -3,7 +3,9 @@ import * as React from 'react';
 import { Translation, iNavData } from '../../models/models';
 import { RES_URL } from '../../config';
 import I18n from '../../services/I18n';
-import { LinkButton } from '../../components/ui/Button/Button';
+import { Button } from '../../components/ui/Button/Button';
+import { SCROLL_TO_SECTION } from '../../constants';
+import { SCROLL_OFFSET } from '../SinglePage/SinglePage';
 
 export interface SplashProps {
     className?: string;
@@ -24,7 +26,12 @@ const Splash: React.FC<SplashProps> = ({ className, deeplink }) => {
             <div className="splash__block splash__copy">
                 <p>{I18n.t('splashIntro')}</p>
             </div>
-            <LinkButton className="splash__block splash__button" href={`/`} />
+            <Button
+                className="splash__button"
+                onClick={() => SCROLL_TO_SECTION('intro', SCROLL_OFFSET)}
+            >
+                <i className="icon-scroll-down" /> {I18n.t('begin')}
+            </Button>
         </div>
     );
 };
