@@ -1,5 +1,6 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 
+import Toggle from '../Toggle/Toggle';
 import { iData } from '../../../models/models';
 
 export interface PageSectionProps {
@@ -9,8 +10,9 @@ export interface PageSectionProps {
 
 const PageSection: React.FC<PageSectionProps> = ({ className, data }) => {
     const cls = className || '';
+    const [toggleIdx, setToggleIdx] = useState(0);
 
-    const { title, copy, footnote, graphType } = data;
+    const { title, copy, footnote, graphType, toggle } = data;
 
     const showDataViz = () => {
         switch (graphType) {
@@ -26,6 +28,7 @@ const PageSection: React.FC<PageSectionProps> = ({ className, data }) => {
         <div className={'page-section ' + cls}>
             <h1 className="page-section__title">{title}</h1>
             <p className="page-section__copy">{copy}</p>
+            <Toggle toggleIdx={toggleIdx} setToggleIdx={(idx: number) => setToggleIdx(idx)} labels={toggle} />
             PAGE SECTION
             <div className="page-section__dataviz">{showDataViz()}</div>
             <p className="page-section__footnote footnote">{footnote}</p>
@@ -33,4 +36,4 @@ const PageSection: React.FC<PageSectionProps> = ({ className, data }) => {
     );
 };
 
-export default PageSection;
+export default React.memo(PageSection);

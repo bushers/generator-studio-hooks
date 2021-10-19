@@ -76,4 +76,5 @@ export interface iData {
     data: any[] | any;
     order: number;
     footnote: string;
+    toggle: string[];
 }
