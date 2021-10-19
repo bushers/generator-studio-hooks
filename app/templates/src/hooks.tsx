@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext, useState, useLayoutEffect, createContext, useCallback, useEffect } from 'react';
 
 import Dialog, { DialogProps } from './components/ui/Dialog/Dialog';
 
@@ -32,15 +32,15 @@ interface DialogContext {
     dialog: DialogWithProps;
 }
 
-const DialogContext = React.createContext<DialogContext | null>(null);
+const DialogContext = createContext<DialogContext | null>(null);
 
 export const DialogProvider = (props) => {
-    const [dialog, setDialogState] = React.useState<DialogWithProps | null>();
+    const [dialog, setDialogState] = useState<DialogWithProps | null>();
 
     const setDialog = (dialogComponent: JSX.Element | JSX.Element[], dialogProps: Partial<DialogProps> = null) => {
         setDialogState({ dialogComponent, dialogProps });
     };
-    const unSetDialog = React.useCallback(() => {
+    const unSetDialog = useCallback(() => {
         setDialogState(null);
     }, [setDialogState]);
 
@@ -53,10 +53,29 @@ export const DialogProvider = (props) => {
 };
 
 export const useDialog = () => {
-    const context = React.useContext(DialogContext);
+    const context = useContext(DialogContext);
     if (context === undefined) {
         throw new Error('useDialog must be used within a DialogProvider');
     }
 
     return context;
+};
+
+/**
+ * Reuseable pagination state
+ */
+export const usePagination = (data: unknown, numToShow: number, startIdx = 0) => {
+    const [displayedDataIdx, setDisplayedDataIdx] = useState({ start: startIdx, end: numToShow });
+
+    const onPageChange = (idx: number) => {
+        setDisplayedDataIdx({ start: idx * numToShow - numToShow, end: idx * numToShow });
+    };
+
+    useEffect(() => {
+        return () => {
+            setDisplayedDataIdx({ start: startIdx, end: numToShow });
+        };
+    }, [data]);
+
+    return { displayedDataIdx, onPageChange };
 };
