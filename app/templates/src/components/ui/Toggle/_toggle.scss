@@ -1,0 +1,38 @@
+.toggle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: $color-2;
+    position: relative;
+
+    &__item {
+        height: 100%;
+        flex: 1 1 0px;
+        cursor: pointer;
+        color: $color-1;
+        z-index: 2;
+        font-family: $font-2;
+        transition: all 0.2s ease-out;
+
+        &--active {
+            color: $color-2;
+            cursor: initial;
+        }
+    }
+}
+
+@include SmallDevice {
+    .toggle {
+    }
+}
+
+@include MediumDevice {
+    .toggle {
+
+    }
+}
+
+@include OnEmbedDevice() {
+    .toggle {
+    }
+}
