@@ -2,8 +2,6 @@ import React, { useContext, useState, useLayoutEffect, createContext, useCallbac
 
 import Dialog, { DialogProps } from './components/ui/Dialog/Dialog';
 
-const { useLayoutEffect } = React;
-
 /**
  * Prevents body scrolling when called in component
  */
