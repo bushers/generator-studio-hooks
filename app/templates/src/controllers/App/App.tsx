@@ -22,6 +22,7 @@ export const STATE_KEY = 'app';
 
 const App: React.FC = () => {
     const [appData, setAppData] = React.useState<iAppData>(null);
+    const [deeplink, setDeeplink] = React.useState(null);
     const [, updateState] = React.useState();
     const forceUpdate = React.useCallback(() => updateState({} as any), []);
 
