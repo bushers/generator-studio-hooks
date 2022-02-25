@@ -24,6 +24,23 @@ export const GET_FIREBASE_DATA = async () => {
     });
 };
 
+export function throttle(callback, limit) {
+    let waiting = false; // Initially, we're not waiting
+    return function () {
+        // We return a throttled function
+        if (!waiting) {
+            // If we're not waiting
+            console.log('yep');
+            callback.apply(this, arguments); // Execute users function
+            waiting = true; // Prevent future invocations
+            setTimeout(function () {
+                // After a period of time
+                waiting = false; // And allow future invocations
+            }, limit);
+        }
+    };
+}
+
 export const ADD_RANKS_TO_DATA = (data: any[], rankKey: string): any[] => {
     const arr: any[] = [];
     const nestedKeys = rankKey.split('.');
