@@ -1,4 +1,22 @@
 .splash {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__scroll-btn {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        svg {
+            width: 20px;
+            margin-top: 5px;
+            transform: rotate(180deg);
+        }
+    }
 }
 
 @include SmallDevice {
@@ -8,6 +26,7 @@
 
 @include MediumDevice {
     .splash {
+        height: 100vh;
     }
 }
 

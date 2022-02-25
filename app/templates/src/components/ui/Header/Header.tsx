@@ -1,10 +1,8 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 
 import { SocialButtons } from '../SocialButtons/SocialButtons';
 import NavMenu from '../NavMenu/NavMenu';
 import { iNavData } from '../../../models/models';
-import { RES_URL } from '../../../config';
-import I18n from '../../../services/I18n';
 
 export interface HeaderProps {
     className?: string;
@@ -26,25 +24,34 @@ const Header: React.FC<HeaderProps> = ({
     scrollToAnchor,
 }) => {
     const cls = className || '';
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    const handleScroll = () => {
+        if (window.scrollY === 0) {
+            setIsScrolled(false);
+        } else if (window.scrollY > 0 && !isScrolled) {
+            setIsScrolled(true);
+        }
+    };
+
+    React.useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
-        <div className={'header ' + cls}>
-            <div dangerouslySetInnerHTML={{ __html: deeplink }} className={`header__block header__client-logo `}></div>
-            <div className={`header__block header__campaign-logo `}>
-                <a href={`/`}>
-                    <img src={RES_URL + 'img/_logos/campaign-logo.svg'} alt={I18n.t('altText')} />
-                </a>
+        <div className={`header ${!isScrolled ? 'header--initial' : ''} ${cls}`}>
+            <div className={'header__burger'} onClick={openBurgerMenu}>
+                <BurgerIcon />
             </div>
-            <div className={'header__block header__burger '} onClick={openBurgerMenu}>
-                <i className="icon-burger" />
-                BURGER
-            </div>
-            <div className={`header__block header__menu ${currSection == 'splash' ? 'header__block--hidden ' : ''}`}>
-                {navData.length > 0 && (
+            <div className={`header__menu`}>
+                {navData?.length > 0 && (
                     <NavMenu currSection={currSection} navData={navData} handleClick={scrollToAnchor} />
                 )}
             </div>
-            <div className="header__block header__socials">
+            <div className="header__socials">
                 <SocialButtons />
             </div>
         </div>
@@ -52,3 +59,11 @@ const Header: React.FC<HeaderProps> = ({
 };
 
 export default Header;
+
+const BurgerIcon = () => {
+    return (
+        <svg width="31" height="16" viewBox="0 0 31 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 16H31V13.3333H0V16ZM0 9.33333H31V6.66667H0V9.33333ZM0 0V2.66667H31V0H0Z" fill="#153574" />
+        </svg>
+    );
+};

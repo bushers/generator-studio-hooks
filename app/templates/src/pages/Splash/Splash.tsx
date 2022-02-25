@@ -1,9 +1,7 @@
 import * as React from 'react';
 
 import { Translation, iNavData } from '../../models/models';
-import { RES_URL } from '../../config';
 import I18n from '../../services/I18n';
-import { Button } from '../../components/ui/Button/Button';
 import { SCROLL_TO_SECTION } from '../../constants';
 import { SCROLL_OFFSET } from '../SinglePage/SinglePage';
 
@@ -14,26 +12,40 @@ export interface SplashProps {
     navData: iNavData[];
 }
 
-const Splash: React.FC<SplashProps> = ({ className, deeplink }) => {
+const Splash: React.FC<SplashProps> = ({ className, deeplink, navData }) => {
     const cls = className || '';
 
     return (
         <div className={'splash ' + cls}>
-            <h1>Splash</h1>
-            <div className="splash__block splash__campaign-logo">
-                <img src={`${RES_URL}img/campaign-logo.png`} alt={I18n.t('campaignName')} />
+            <div className="splash__container">
+                <h1 className="splash__title">{I18n.t('campaignName')}</h1>
+
+                <div className="splash__copy">
+                    <p>{I18n.t('splashIntro')}</p>
+                </div>
+                <div
+                    className="splash__client-logo"
+                    dangerouslySetInnerHTML={{ __html: deeplink }}
+                ></div>
+
+                <button className="splash__scroll-btn" onClick={() => SCROLL_TO_SECTION(navData[0].key, SCROLL_OFFSET)}>
+                    {I18n.t('begin')}
+                    <Arrow />
+                </button>
             </div>
-            <div className="splash__block splash__copy">
-                <p>{I18n.t('splashIntro')}</p>
-            </div>
-            <Button
-                className="splash__button"
-                onClick={() => SCROLL_TO_SECTION('intro', SCROLL_OFFSET)}
-            >
-                <i className="icon-scroll-down" /> {I18n.t('begin')}
-            </Button>
         </div>
     );
 };
 
 export default Splash;
+
+export const Arrow = () => {
+    return (
+        <svg viewBox="0 0 13 8" fill="none">
+            <path
+                d="M11.2813 7.93457L6.5 3.16373L1.71875 7.93457L0.25 6.46582L6.5 0.215817L12.75 6.46582L11.2813 7.93457Z"
+                fill="#000000"
+            />
+        </svg>
+    );
+};
