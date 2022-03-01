@@ -7,7 +7,7 @@ export interface ToggleProps {
     setToggleIdx: (idx: number) => void;
 }
 
-const Toggle: React.FC<ToggleProps> = ({ className, labels = ['toggle2', 'toggle2'], toggleIdx, setToggleIdx }) => {
+const Toggle: React.FC<ToggleProps> = ({ className, labels = ['toggle1', 'toggle2'], toggleIdx, setToggleIdx }) => {
     const cls = className || '';
 
     return (

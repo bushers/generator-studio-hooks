@@ -18,5 +18,6 @@ module.exports = {
         'react/prop-types': 0,
         '@typescript-eslint/class-name-casing': 0,
         'react/jsx-no-target-blank': 0,
+        'prefer-rest-params': 0,
     },
 };

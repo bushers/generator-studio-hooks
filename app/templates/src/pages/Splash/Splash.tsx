@@ -23,12 +23,9 @@ const Splash: React.FC<SplashProps> = ({ className, deeplink, navData }) => {
                 <div className="splash__copy">
                     <p>{I18n.t('splashIntro')}</p>
                 </div>
-                <div
-                    className="splash__client-logo"
-                    dangerouslySetInnerHTML={{ __html: deeplink }}
-                ></div>
+                <div className="splash__client-logo" dangerouslySetInnerHTML={{ __html: deeplink }}></div>
 
-                <button className="splash__scroll-btn" onClick={() => SCROLL_TO_SECTION(navData[0].key, SCROLL_OFFSET)}>
+                <button className="splash__scroll-btn" onClick={() => SCROLL_TO_SECTION(navData[1].key, SCROLL_OFFSET)}>
                     {I18n.t('begin')}
                     <Arrow />
                 </button>
