@@ -1,0 +1,30 @@
+.commentary{
+
+    &__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &--active {
+            transform: rotate(180deg);
+        }
+    }
+
+}
+
+@include SmallDevice{
+    .commentary{
+    }
+}
+
+
+@include MediumDevice{
+    .commentary{
+    }
+}
+
+@include OnEmbedDevice(){
+    .commentary{
+
+    }
+}
