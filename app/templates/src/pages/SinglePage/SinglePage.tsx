@@ -55,7 +55,7 @@ const SinglePage: React.FC<SinglePageProps> = ({ appData, deeplink }) => {
 
             <div className="single-page__content">
                 <ScrollableAnchor hashId="home" setHashKey={(key) => setHashKey(key)}>
-                    <Splash locale={appData.locale} deeplink={deeplink} navData={appData.navData} />
+                    <Splash locale={appData.locale} deeplink={deeplink} />
                 </ScrollableAnchor>
 
                 <ScrollableAnchor hashId="intro" setHashKey={(key) => setHashKey(key)}>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Translation, iNavData } from '../../models/models';
+import { Translation } from '../../models/models';
 import I18n from '../../services/I18n';
 import { SCROLL_TO_SECTION } from '../../constants';
 import { SCROLL_OFFSET } from '../SinglePage/SinglePage';
@@ -9,10 +9,12 @@ export interface SplashProps {
     className?: string;
     locale: Translation;
     deeplink: string;
-    navData: iNavData[];
 }
 
-const Splash: React.FC<SplashProps> = ({ className, deeplink, navData }) => {
+// Add key of section that scroll btn will click to
+const introSectionKey = '';
+
+const Splash: React.FC<SplashProps> = ({ className, deeplink }) => {
     const cls = className || '';
 
     return (
@@ -25,7 +27,7 @@ const Splash: React.FC<SplashProps> = ({ className, deeplink, navData }) => {
                 </div>
                 <div className="splash__client-logo" dangerouslySetInnerHTML={{ __html: deeplink }}></div>
 
-                <button className="splash__scroll-btn" onClick={() => SCROLL_TO_SECTION(navData[1].key, SCROLL_OFFSET)}>
+                <button className="splash__scroll-btn" onClick={() => SCROLL_TO_SECTION(introSectionKey, SCROLL_OFFSET)}>
                     {I18n.t('begin')}
                     <Arrow />
                 </button>
