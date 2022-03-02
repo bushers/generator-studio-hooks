@@ -1,0 +1,75 @@
+.rank-list{
+    padding: 20px;
+    background-color: white;
+    border-radius: 4px;
+
+    &__row {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        & > * {
+            &:first-child {
+                flex-basis: 40px;
+                margin-right: 10px;
+                text-align: center;
+            }
+            &:last-child {
+                margin-left: auto;
+            }
+        }
+    }
+
+    &__headers {
+        font-weight: bold;
+        padding: 10px;
+    }
+
+    &__item {
+        padding: 10px;
+        box-shadow: 0 11px 31px #0f152912, 0 2.2px 5.0375px #0f152909;
+        margin-bottom: 10px;
+        .rank {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            margin-bottom: 5px;
+        }
+        .value {
+            font-weight: bold;
+        }
+    }
+
+    &__bar {
+        height: 15px;
+        width: 100%;
+        background-color: lightgray;
+        position: relative;
+        .inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: #44b5bd;
+        }
+    }
+}
+
+@include SmallDevice{
+    .rank-list{
+    }
+}
+
+
+@include MediumDevice{
+    .rank-list{
+    }
+}
+
+@include OnEmbedDevice(){
+    .rank-list{
+
+    }
+}
