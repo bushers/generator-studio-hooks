@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { EmbedCode } from '../EmbedCode/EmbedCode';
+import EmbedCode from '../EmbedCode/EmbedCode';
 import { RES_URL } from '../../../config';
 import I18n from '../../../services/I18n';
 import NavMenu from '../NavMenu/NavMenu';

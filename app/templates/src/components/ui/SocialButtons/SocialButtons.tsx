@@ -45,16 +45,16 @@ export const SocialButtons: React.FC<SocialButtonsProps> = (props) => {
 
     return (
         <div className="social-buttons-container">
-            <a className="share-button facebook hide-on-embed" href={facebookLink} target="_blank">
+            <a className="social-buttons-container__share-button facebook hide-on-embed" href={facebookLink} target="_blank">
                 <i className="icon-facebook"></i>
             </a>
-            <a className="share-button twitter hide-on-embed" href={twitterLink} target="_blank">
+            <a className="social-buttons-container__share-button twitter hide-on-embed" href={twitterLink} target="_blank">
                 <i className="icon-twitter"></i>
             </a>
-            <div className="share-button embed hide-on-embed" onClick={onEmbedClick}>
+            <div className="social-buttons-container__share-button embed hide-on-embed" onClick={onEmbedClick}>
                 <i className="icon-embed"></i>
             </div>
-            <div className="share-button info" onClick={onInfoClick}>
+            <div className="social-buttons-container__share-button info" onClick={onInfoClick}>
                 <i className="icon-info"></i>
             </div>
         </div>

@@ -4,12 +4,15 @@
 
 @include SmallDevice{
     .page-section{
+        max-width: 600px;
+        margin: auto;
     }
 }
 
 
 @include MediumDevice{
     .page-section{
+        max-width: initial;
     }
 }
 

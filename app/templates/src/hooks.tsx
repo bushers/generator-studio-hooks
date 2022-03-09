@@ -17,6 +17,24 @@ export const useLockBodyScroll = () => {
 };
 
 /**
+ * Runs a function if a click occurs outside an element
+ */
+ export const useOutsideAlerter = (ref, func) => {
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                func();
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [ref]);
+};
+
+/**
  * Allows components to use a Dialog/Modal
  */
 interface DialogWithProps {

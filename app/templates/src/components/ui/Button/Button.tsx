@@ -11,7 +11,7 @@ export const Button: React.FC<ButtonProps> = ({ className, onClick, children }) 
     const cls = className || '';
     return (
         <div className={'button ' + cls} onClick={onClick}>
-            <div className="button__label">{children}</div>
+            {children}
         </div>
     );
 };
@@ -34,7 +34,7 @@ export const LinkButton: React.FC<LinkButtonProps> = ({ className, href, childre
 
     return (
         <a href={href || ''} className={'button ' + cls} onTouchStart={redirectTo}>
-            <div className="button__label">{children}</div>
+            {children}
         </a>
     );
 };
