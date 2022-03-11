@@ -10,6 +10,7 @@ export interface DialogProps {
     className?: string;
     animateIn?: string;
     animateOut?: string;
+    animationSpeed?: number;
 }
 
 export interface DialogState {}
@@ -21,33 +22,40 @@ const Dialog: React.FC<DialogProps> = ({
     close = () => ({}),
     animateIn = 'fadeIn',
     animateOut = 'fadeOut',
+    animationSpeed = 500,
 }) => {
     const clz = className;
 
-    const backdropEl = React.useRef(null);
-    const contentWrapperEl = React.useRef(null);
+    const backdropEl = React.useRef<HTMLDivElement>(null);
+    const contentWrapperEl = React.useRef<HTMLDivElement>(null);
 
-    // const animteExit = () => {
-    //     this.backdropEl.classList.remove('animated', 'fadeIn');
-    //     this.contentWrapperEl.classList.remove('animated', animateIn);
+    const animateExit = () => {
+        backdropEl?.current.classList.remove('animated', 'fadeIn');
+        contentWrapperEl?.current.classList.remove('animated', animateIn);
 
-    //     this.backdropEl.classList.add('animated', 'fadeOut');
-    //     this.contentWrapperEl.classList.add('animated', animateOut);
-    // };
+        backdropEl?.current.classList.add('animated', 'fadeOut');
+        contentWrapperEl?.current.classList.add('animated', animateOut);
+    };
 
     useLockBodyScroll();
 
     return ReactDOM.createPortal(
         <div className={`dialog ${clz}`}>
             <div
-                className="dialog__backdrop animated speed-5 fadeIn"
-                onClick={close}
+                className={`dialog__backdrop animated fadeIn speed-${animationSpeed / 100} `}
+                onClick={() => {
+                    close();
+                    animateExit();
+                    setTimeout(() => {
+                        unSetDialog();
+                    }, animationSpeed);
+                }}
                 id="DialogBackdrop"
                 ref={backdropEl}
             ></div>
 
             <div
-                className={`dialog__wrapper animated speed-5 ${animateIn}`}
+                className={`dialog__wrapper animated ${animateIn} speed-${animationSpeed / 100} `}
                 ref={contentWrapperEl}
             >
                 <div
@@ -55,7 +63,10 @@ const Dialog: React.FC<DialogProps> = ({
                     id="DialogCloseButton"
                     onClick={() => {
                         close();
-                        unSetDialog();
+                        animateExit();
+                        setTimeout(() => {
+                            unSetDialog();
+                        }, animationSpeed);
                     }}
                 >
                     <i className="icon-close"></i>
