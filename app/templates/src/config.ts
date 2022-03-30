@@ -68,7 +68,7 @@ export const IS_MOBILE =
 /**
  * if mobile landscape
  */
-export const IS_MOB_LANDSCAPE = () => IS_MOBILE && window.innerWidth > window.innerHeight;
+ export const IS_MOB_LANDSCAPE = () => IS_MOBILE && window.innerWidth > window.innerHeight && !SCREEN_WIDTH.IS_LARGE();
 
 /**
  * if browser is safari
